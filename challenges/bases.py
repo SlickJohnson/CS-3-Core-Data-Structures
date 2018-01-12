@@ -100,8 +100,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    import sys
-    args = sys.argv[1:]
-
-    print(decode(str(args[0]), int(args[1])))
+    main()

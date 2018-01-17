@@ -1,5 +1,5 @@
 #!python
-import pdb
+
 
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
@@ -9,18 +9,21 @@ def contains(text, pattern):
     if pattern == '':
         return True
 
-    match = ''
+    match = ''  # Pattern chain.
     patt_index = 0
     for text_char in text:
         patt_char = pattern[patt_index]
 
         if text_char == patt_char:
+            # Continue chain.
             match += text_char
             patt_index += 1
         else:
+            # Break chain.
             patt_index = 0
             match = ''
 
+            # Check if char that broke chain matches first char in pattern.
             if text_char == pattern[0]:
                 match += text_char
                 patt_index += 1

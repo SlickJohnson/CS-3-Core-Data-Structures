@@ -1,4 +1,5 @@
 #!python
+"""String searching algorithms."""
 
 
 def contains(text, pattern):
@@ -6,35 +7,11 @@ def contains(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    if pattern == '':
-        return True
-
-    match = ''  # Pattern chain.
-    patt_index = 0
-    for text_char in text:
-        patt_char = pattern[patt_index]
-
-        if text_char == patt_char:
-            # Continue chain.
-            match += text_char
-            patt_index += 1
-        else:
-            # Break chain.
-            patt_index = 0
-            match = ''
-
-            # Check if char that broke chain matches first char in pattern.
-            if text_char == pattern[0]:
-                match += text_char
-                patt_index += 1
-
-        if match == pattern:
-            return True
-
-    return False
+    # Returns true of there is an index found
+    return find_index(text, pattern) is not None
 
 
-def find_index(text, pattern):
+def find_index(text, pattern, offset=0):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
@@ -43,36 +20,56 @@ def find_index(text, pattern):
     if pattern == '':
         return 0
 
-    match = ''  # Pattern chain.
     patt_index = 0
-    for index, text_char in enumerate(text):
-        patt_char = pattern[patt_index]
+    matches = 0
+    for text_index in range(offset, len(text)):
+        for patt_index in range(len(pattern)):
+            # Prevent index out of range errors.
+            if text_index + patt_index >= len(text):
+                break
 
-        if text_char == patt_char:
-            # Continue chain.
-            match += text_char
-            patt_index += 1
-        else:
-            # Break chain.
-            patt_index = 0
-            match = ''
+            # Break loop if there's a char mismatch.
+            if text[text_index + patt_index] != pattern[patt_index]:
+                matches = 0
+                break
 
-            # Check if char that broke chain matches first char in pattern.
-            if text_char == pattern[0]:
-                match += text_char
-                patt_index += 1
+            matches += 1
 
-        if match == pattern:
-            return index - len(pattern) + 1
+        if matches == len(pattern):
+            return text_index
 
     return None
 
 
-def find_all_indexes(text, pattern):
+def find_all_indexes(text, pattern, indexes=None, offset=None):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
+    if pattern == '':
+        return [index for index, _ in enumerate(text)]
+
+    if indexes is None or offset is None:
+        indexes = []
+        offset = 0
+
+    # Find pattern index starting from given offset.
+    found_index = find_index(text, pattern, offset)
+
+    # Base case. If no pattern found, end recursive cycle.
+    if found_index is None:
+        return indexes
+
+    indexes.append(found_index)
+
+    # Skip unnecessary characters
+    offset = found_index + len(pattern)
+    # But account for overlapping patterns.
+    if len(pattern) > 1:
+        offset -= 1
+
+    return find_all_indexes(text, pattern, indexes, offset)
 
 
 def test_string_algorithms(text, pattern):

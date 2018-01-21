@@ -1,5 +1,5 @@
 #!python
-
+"""LinkedList implementation."""
 from linkedlist import LinkedList, Node
 import unittest
 

@@ -98,24 +98,65 @@ class LinkedList(object):
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
 
-        node = self.head
-        node_index = 0
-        while node is not None:  # O(n)
-            if node_index == index:  # O(1)
-                return node.data  # O(1)
-
+        # Find node.
+        node = self.head  # O(1)
+        node_index = 0  # O(1)
+        while node_index != index:  # O(n)
             node_index += 1  # O(1)
             node = node.next  # O(1) time to reassign variable
 
+        return node.data  # O(1)
+
     def insert_at_index(self, index, item):
-        """Insert the given item at the given index in this linked list, or
-        raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        """Insert the given item at the given index in this linked list.
+
+        Args:
+
+
+        Performance:
+            Best: ??? under what conditions? [TODO]
+            Worst: ??? under what conditions? [TODO]
+
+        Raises:
+            ValueError: if the given index is out of range of the list size.
+
+        """
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
+
+        # Setup nodes
+        current_node = self.head  # O(1)
+        previous_node = None  # O(1)
+        new_node = Node(item)
+
+        # New linkedlist, so all we need to do is append.
+        if self.size == 0:  # O(1)
+            self.append(item)  # O(1), adds a Node to an empty list
+
+        # Insert at head.
+        elif index == 0:
+            self.prepend(item)  # O(1), prepends item.
+
+        # Insert at tail.
+        elif index == self.size:
+            self.append(item)  # O(1), creates new tail
+
+        # Insert normally
+        else:
+            # Find adjacent nodes.
+            node_index = 0  # O(1)
+            while node_index != index:  # O(n)
+                node_index += 1  # O(1)
+                previous_node = current_node  # O(1)
+                current_node = current_node.next  # O(1)
+
+            # Insert new node between adjacent nodes.
+            new_node.next = current_node  # O(1)
+            previous_node.next = new_node  # O(1)
+
+            # Update size.
+            self.size += 1  # O(1)
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.

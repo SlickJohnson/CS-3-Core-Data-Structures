@@ -153,6 +153,10 @@ class ArrayQueue(object):
         Returns:
             front: anytype -- the first item in the queue.
 
+        Performance:
+            Best/Worst: O(1), only concerned with the first element in the
+                list.
+
         Raises:
             ValueError: If queue is empty.
 
@@ -161,7 +165,7 @@ class ArrayQueue(object):
             raise ValueError('Empty queue')  # O(1)
 
         front = self.front()  # O(1)
-        self.list.remove(front)  # O(n)
+        self.list.remove(front)  # O(1)
 
         return front
 

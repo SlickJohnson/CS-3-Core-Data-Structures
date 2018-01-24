@@ -59,12 +59,11 @@ class LinkedQueue(object):
                 'head' in the linkedlist.
 
         """
-        front = self.list.head  # O(1)
-        if front:  # O(1)
-            return front.data  # O(1)
+        # Queue is empty; return None.
+        if self.is_empty():
+            return None
 
-        # Queue is empty, return None.
-        return None  # O(1)
+        return self.list.head.data  # O(1)
 
     def dequeue(self):
         """Remove and return the item at the front of this queue.
@@ -167,7 +166,7 @@ class ArrayQueue(object):
         front = self.front()  # O(1)
         self.list.remove(front)  # O(1)
 
-        return front
+        return front  # O(1)
 
 
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below

@@ -219,7 +219,7 @@ class LinkedList(object):
 
         """
         if self.is_empty():  # Ll is empty, so return nothing
-            return ValueError("Linkedlist is empty")
+            return None
 
         current_node = self.head
         while current_node:  # Loop until None
@@ -284,7 +284,7 @@ class LinkedList(object):
 
         """
         if self.is_empty():
-            raise ValueError("Item not found: {}. Empty list.".format(item))
+            raise KeyError("Item not found: {}. Empty list.".format(item))
 
         if self.head.data == item:
             self.head = self.head.next
@@ -312,7 +312,7 @@ class LinkedList(object):
             prev_node = current_node
             current_node = current_node.next
 
-        raise ValueError("Item not found: {}".format(item))
+        raise KeyError("Item not found: {}".format(item))
 
 
 def test_linked_list():

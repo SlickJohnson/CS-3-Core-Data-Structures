@@ -4,7 +4,7 @@ from set_hashtable import Set
 import unittest
 
 
-class HashTableSetTest(unittest.TestCase):
+class HashSetTest(unittest.TestCase):
     """Test Set implemented using a HashTable."""
 
     def test_init(self):
@@ -14,7 +14,7 @@ class HashTableSetTest(unittest.TestCase):
         assert st.length() == 0
         assert st.size == 0
 
-    def test_items(self):
+    def test_elements(self):
         """Check if a list of items in the Set can be retrieved."""
         st = Set()
         assert st.elements() == []

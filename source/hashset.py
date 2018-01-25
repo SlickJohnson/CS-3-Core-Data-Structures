@@ -3,12 +3,38 @@
 from hashtable import HashTable
 
 
-class Set(HashTable):
+class HashSet(object):
     """A Set data structure implemented using a HashTable."""
 
     def __init__(self, elements=None):
         """Initialize a new empty set, and add any given elements."""
         super().__init__()
+
+    def elements(self):
+        """Return all the elements in this set.
+
+        Complexity:
+            Best:
+            Worst:
+
+        Returns:
+            list: a list containing all the elements in this set.
+
+        """
+        pass
+
+    def length(self):
+        """Return the size of this set.
+
+        Complexity:
+            Best:
+            Worst:
+
+        Returns:
+            int: the size of the set.
+
+        """
+        pass
 
     def contains(self, element):
         """Check whether element is in this set.
@@ -22,19 +48,6 @@ class Set(HashTable):
 
         Returns:
             bool: whether the element is in this set.
-
-        """
-        pass
-
-    def elements(self):
-        """Return all the elements in this set.
-
-        Complexity:
-            Best:
-            Worst:
-
-        Returns:
-            list: a list containing all the elements in this set.
 
         """
         pass

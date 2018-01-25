@@ -26,6 +26,19 @@ class Set(HashTable):
         """
         pass
 
+    def elements(self):
+        """Return all the elements in this set.
+
+        Complexity:
+            Best:
+            Worst:
+
+        Returns:
+            list: a list containing all the elements in this set.
+
+        """
+        pass
+
     def add(self, element):
         """Add element to this set, if not present already.
 

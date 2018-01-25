@@ -168,7 +168,6 @@ class HashTable(object):
             # Remove the key-value entry from the bucket
             bucket.delete(entry)
             self.size -= 1
-            print(key, self.size)
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
@@ -194,7 +193,7 @@ class HashTable(object):
         # O(n), create empty buckets.
         self.buckets = [LinkedList() for i in range(new_size)]
         self.size = 0  # O(1), reset size.
-        for key, value in enumerate(entries):  # O(n), put entries in new list.
+        for key, value in entries:  # O(n), put entries in new list.
             self.set(key, value)
 
 

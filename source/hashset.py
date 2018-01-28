@@ -26,7 +26,7 @@ class HashSet(object):
             list: a list containing all the elements in this set.
 
         """
-        pass
+        return self.hashtable.keys()
 
     def contains(self, element):
         """Check whether element is in this set.
@@ -73,7 +73,8 @@ class HashSet(object):
             KeyError: if the element is not in this set.
 
         """
-        pass
+        self.hashtable.delete(element)
+        self.size -= 1
 
     def union(self, other_set):
         """Return a new set that is the union of this set and other_set.

@@ -1,22 +1,20 @@
 #!python
-"""Tests for Set data stuctures."""
-from set_hashtable import Set
+"""Tests for HashSet data stuctures."""
+from hashset import HashSet
 import unittest
 
 
 class HashSetTest(unittest.TestCase):
-    """Test Set implemented using a HashTable."""
+    """Test HashSet implemented using a HashTable."""
 
     def test_init(self):
-        """Initialize Set and check to see if default values are set."""
-        st = Set(4)
-        assert len(st.buckets) == 4
-        assert st.length() == 0
-        assert st.size == 0
+        """Initialize HashSet and check to see if default values are set."""
+        st = HashSet(['a','b'])
+        assert st.size == 2
 
     def test_elements(self):
-        """Check if a list of items in the Set can be retrieved."""
-        st = Set()
+        """Check if a list of items in the HashSet can be retrieved."""
+        st = HashSet()
         assert st.elements() == []
         st.add('A')
         assert st.elements() == ['A']
@@ -27,18 +25,18 @@ class HashSetTest(unittest.TestCase):
 
     def test_length(self):
         """Check if the length is updated properly."""
-        st = Set()
-        assert st.length() == 0
+        st = HashSet()
+        assert st.size == 0
         st.add('check')
-        assert st.length() == 1
+        assert st.size == 1
         st.add('set')
-        assert st.length() == 2
+        assert st.size == 2
         st.add('size')
-        assert st.length() == 3
+        assert st.size == 3
 
     def test_contains(self):
         """Check to see if the contains method works as intended."""
-        st = Set()
+        st = HashSet()
         st.add('Hello')
         st.add('are')
         st.add('you')
@@ -50,19 +48,19 @@ class HashSetTest(unittest.TestCase):
         assert st.contains('are') is True
 
     def test_remove(self):
-        """Check to see if items can be removed from the Set."""
-        st = Set()
+        """Check to see if items can be removed from the HashSet."""
+        st = HashSet()
         st.add('Please')
         st.add('dont')
         st.add('remove')
         st.add('me')
-        assert st.length() == 4
+        assert st.size == 4
         st.remove('please')
         st.remove('dont')
-        assert st.length() == 2
+        assert st.size == 2
         self.assertCountEqual(st.elements(), ['remove', 'me'])
         st.remove('me')
-        st.length() == 1
+        assert st.size == 1
         with self.assertRaises(KeyError):
             st.delete('NOOOO')
 

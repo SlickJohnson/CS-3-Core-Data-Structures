@@ -55,14 +55,14 @@ class HashSetTest(unittest.TestCase):
         st.add('remove')
         st.add('me')
         assert st.size == 4
-        st.remove('please')
+        st.remove('Please')
         st.remove('dont')
         assert st.size == 2
         self.assertCountEqual(st.elements(), ['remove', 'me'])
         st.remove('me')
         assert st.size == 1
         with self.assertRaises(KeyError):
-            st.delete('NOOOO')
+            st.remove('NOOOO')
 
     def test_union(self):
         """Check if the union operation works as intended."""

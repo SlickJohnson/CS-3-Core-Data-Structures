@@ -8,7 +8,12 @@ class HashSet(object):
 
     def __init__(self, elements=None):
         """Initialize a new empty set, and add any given elements."""
-        super().__init__()
+        self.hashtable = HashTable()
+        self.size = 0
+        # Add all provided elements provided.
+        if elements:
+            for element in elements:
+                self.add(element)
 
     def elements(self):
         """Return all the elements in this set.
@@ -19,19 +24,6 @@ class HashSet(object):
 
         Returns:
             list: a list containing all the elements in this set.
-
-        """
-        pass
-
-    def length(self):
-        """Return the size of this set.
-
-        Complexity:
-            Best:
-            Worst:
-
-        Returns:
-            int: the size of the set.
 
         """
         pass
@@ -50,7 +42,7 @@ class HashSet(object):
             bool: whether the element is in this set.
 
         """
-        pass
+        return self.hashtable.contains(element)
 
     def add(self, element):
         """Add element to this set, if not present already.
@@ -63,7 +55,9 @@ class HashSet(object):
             Worst:
 
         """
-        pass
+        if not self.contains(element):
+            self.hashtable.set(element, None)
+            self.size += 1
 
     def remove(self, element):
         """Remove element from this set, if present.

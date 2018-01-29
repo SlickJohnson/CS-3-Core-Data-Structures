@@ -73,7 +73,7 @@ class HashSet(object):
             KeyError: if the element is not in this set.
 
         """
-        self.hashtable.delete(element)
+        self.hashtable.delete(element)  # O(1), if element 
         self.size -= 1
 
     def union(self, other_set):
@@ -90,7 +90,18 @@ class HashSet(object):
             Set: the union of the two sets.
 
         """
-        pass
+        union = self
+        # Loop through each element in the other set
+        # O(s), where s is size of otherset
+        for otherset_element in other_set.elements():
+            # Skip element if already in the union.
+            # O(u), where u is the number of all unique elements between each set.
+            if union.contains(otherset_element):
+                continue
+            # add it to the union if not
+            union.add(otherset_element)  # O(1)
+
+        return union  # O(1)
 
     def intersection(self, other_set):
         """Return a new set that is the intersection of this set and other_set.
@@ -106,7 +117,16 @@ class HashSet(object):
             Set: the intersection between the two sets.
 
         """
-        pass
+        intersection = HashSet()  # O(1)
+        # Loop through each element in the other set
+        # O(n), where n is size of otherset
+        for otherset_element in other_set.elements():
+            # Add element if it appears in both sets.
+            # O(i), where i is the number of all unique elements between each set.
+            if self.contains(otherset_element):
+                intersection.add(otherset_element)  # O(1)
+
+        return intersection  # O(1)
 
     def difference(self, other_set):
         """Return a new set that is the difference of this set and other_set.
@@ -122,4 +142,15 @@ class HashSet(object):
             Set: the difference between the two sets.
 
         """
-        pass
+        difference = HashSet()  # O(1)
+        # Loop through each element in the other set
+        # O(n), where n is size of otherset
+        for otherset_element in other_set.elements():
+            # Skip element if it appears in both sets.
+            # O(i), where i is the number of all unique elements between each set.
+            if self.contains(otherset_element):
+                continue
+            # add it if it's unique among both sets.
+            difference.add(otherset_element)  # O(1)
+
+        return difference  # O(1)

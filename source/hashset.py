@@ -73,7 +73,7 @@ class HashSet(object):
             KeyError: if the element is not in this set.
 
         """
-        self.hashtable.delete(element)  # O(1), if element 
+        self.hashtable.delete(element)  # O(1), if element
         self.size -= 1
 
     def union(self, other_set):
@@ -95,7 +95,7 @@ class HashSet(object):
         # O(s), where s is size of otherset
         for otherset_element in other_set.elements():
             # Skip element if already in the union.
-            # O(u), where u is the number of all unique elements between each set.
+            # O(u), u is the number of all unique elements between each set.
             if union.contains(otherset_element):
                 continue
             # add it to the union if not
@@ -122,7 +122,7 @@ class HashSet(object):
         # O(n), where n is size of otherset
         for otherset_element in other_set.elements():
             # Add element if it appears in both sets.
-            # O(i), where i is the number of all unique elements between each set.
+            # O(i), i is the number of all unique elements between each set.
             if self.contains(otherset_element):
                 intersection.add(otherset_element)  # O(1)
 
@@ -147,7 +147,7 @@ class HashSet(object):
         # O(n), where n is size of otherset
         for otherset_element in other_set.elements():
             # Skip element if it appears in both sets.
-            # O(i), where i is the number of all unique elements between each set.
+            # O(i), i is the number of all unique elements between each set.
             if self.contains(otherset_element):
                 continue
             # add it if it's unique among both sets.

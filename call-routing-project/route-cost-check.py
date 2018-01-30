@@ -2,7 +2,7 @@
 from strings import find_index
 
 
-def get_cheapest_route(number, routes_costs):
+def get_call_cost(number, routes_costs):
     """Return the cost for calling the given number.
 
     Args:
@@ -14,7 +14,7 @@ def get_cheapest_route(number, routes_costs):
         Worst:
 
     Returns:
-        str: the route and cost for calling the number seperated by a comma.
+        str: the cost for calling the number.
 
     """
     cheapest_route = routes_costs[0]
@@ -32,10 +32,10 @@ def get_cheapest_route(number, routes_costs):
             if is_longer_match or (is_same_len and is_cheaper_route):  # O (1)
                 cheapest_route = [route, cost]  # O(1)
 
-    return ','.join(cheapest_route)  # O(1)
+    return cheapest_route[1]  # O(1)
 
 
-def get_route_costs(numbers, routes):
+def get_call_costs(numbers, routes):
     """Return the costs for calling a list of numbers.
 
     Args:
@@ -50,7 +50,12 @@ def get_route_costs(numbers, routes):
         list: the costs for calling each number.
 
     """
-    pass
+    call_costs = []
+    for number in numbers:
+        cost = get_call_cost(number, routes)
+        call_costs.append('{},{}'.format(number, cost))
+
+    return call_costs
 
 
 def __run_scenario_1():
@@ -71,11 +76,20 @@ def __run_scenario_2():
 
     100k routes and 1000 phone numbers
     """
+    print('Very, very, very slow, but it\'s operationalized.\nAlmost done....')
+    # Get the list of carrier routes.
     with open('input/route-costs/route-costs-106000.txt') as txt_file:
         entries = txt_file.read().rsplit()
         routes_costs = [entry.split(',') for entry in entries]
-
-    print(get_cheapest_route('+17184285555', routes_costs))
+    # Get the list of phone numbers.
+    with open('input/phone-numbers/phone-numbers-1000.txt') as txt_file:
+        phone_numbers = txt_file.read().rsplit()
+    # Get the costs for each number.
+    costs = get_call_costs(phone_numbers, routes_costs)
+    with open('output/route-costs-2.txt') as txt_file:
+        for cost in costs:
+            # Write the costs to the output.
+            txt_file.write('{}\n'.format(cost))
 
 
 def __run_scenario_3():

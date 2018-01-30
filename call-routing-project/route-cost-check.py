@@ -16,12 +16,18 @@ def get_route_cost(number, routes):
         str: the cost for calling the number.
 
     """
-    pass
 
 
 def __run_scenario_1():
-    """Check cost one time."""
-    print("running scenario 1...")
+    """Check cost one time.
+
+    100k carrier routes and a single phone number.
+    """
+    print("""
+    Open route-costs-106000.txt, and simply search using `CMD/CTRL + F`
+        and find the longest match.
+    Very fast and simple, but requires manual labour.
+    """)
 
 
 def __run_scenario_2():

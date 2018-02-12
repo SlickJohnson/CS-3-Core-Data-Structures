@@ -5,33 +5,105 @@ def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check that all adjacent items are in order, return early if not
+    # Empty or 1 element arrays are already sorted.
+    if len(items) <= 1:
+        return True
+
+    # Loop through the array.
+    for index in range(len(items) - 1):
+        # Check if the current element pair is out of order.
+        if items[index] > items[index + 1]:
+            return False
+
+    # Array is sorted.
+    return True
+
+
+def _swap(items, left_index, right_index):
+    """Swap the items of the given indexes.
+
+    Args:
+        left: int -- the item that's on the left side of the swap.
+        right: int -- the item that's on the right side of the swap.
+    """
+    # Grab items at index.
+    left = items[left_index]
+    right = items[right_index]
+    # Swap items.
+    items[left_index] = right
+    items[right_index] = left
 
 
 def bubble_sort(items):
-    """Sort given items by swapping adjacent items that are out of order, and
-    repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Swap adjacent items that are out of order
+    """Sort items using bubble sort.
+
+    Sort given items by swapping adjacent items that are out of order, and
+    repeating until all items are in sorted orderself.
+
+    Args:
+        items: list -- the items that will be sorted in ascending order.
+    """
+    # Empty or 1 element arrays are already sorted.
+    if len(items) <= 1:
+        return
+    # Loop until the array is sorted (no swaps).
+    swaps = 0
+    # Set last_sorted item to last item in array on first iteration.
+    last_sorted = len(items)
+    while True:
+        # Loop through the  array.
+        for index in range(last_sorted - 1):
+            # Reset swaps for new iteration.
+            swaps = 0
+            # Get number pair.
+            left = items[index]
+            right = items[index + 1]
+            # Check to see if pair is out of order.
+            if left > right:
+                # Swap elements
+                _swap(items, index, index + 1)
+                swaps += 1
+        # Update last sorted item index.
+        last_sorted = index + 1
+        # Check if done sorting.
+        if swaps <= 0:
+            # End loop.
+            return
 
 
 def selection_sort(items):
-    """Sort given items by finding minimum item, swapping it with first
+    """Sort items using selection sort.
+
+    Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Find minimum item in unsorted items
-    # TODO: Swap it with first unsorted item
+
+    Args:
+        items: list -- items that will be sorted in ascending order using
+            selection sort.
+    """
+    # Repeat until all items are in sorted order.
+    for unsorted_index, unsorted_item in enumerate(items):
+        # Keep track of the index of the lowest value found.
+        min_index = unsorted_index
+        # Loop throught items starting from fist unsorted item.
+        for index in range(unsorted_index, len(items)):
+            # Update index_of_min if a lower value is found.
+            if items[index] < items[min_index]:
+                min_index = index
+        # Swap min item with first unsorted item.
+        _swap(items, min_index, unsorted_index)
 
 
 def insertion_sort(items):
-    """Sort given items by taking first unsorted item, inserting it in sorted
+    """Sort items using insertion sort.
+
+    Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+
+    Args:
+        items: list -- items that will be sorted in ascending order using
+            insertion sort.
+    """
     # TODO: Repeat until all items are in sorted order
     # TODO: Take first unsorted item
     # TODO: Insert it in sorted order in front of items

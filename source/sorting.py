@@ -1,5 +1,5 @@
 #!python
-
+from binarytree import BinarySearchTree
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
@@ -104,7 +104,9 @@ def insertion_sort(items):
         items: list -- items that will be sorted in ascending order using
             insertion sort.
     """
-    # TODO: Repeat until all items are in sorted order
+    # Repeat until all items are in sorted order
+    for item in items:
+        pass
     # TODO: Take first unsorted item
     # TODO: Insert it in sorted order in front of items
 
@@ -114,9 +116,24 @@ def merge(items1, items2):
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
+    # Create new list to store sorted items.
+    sorted_list = []
+    # Repeat until one list is empty.
+    while items1 and items2:
+        # Find min item in both lists.
+        items1_min = items1[0]
+        items2_min = items2[0]
+        # Append min items in sorted order.
+        if items1_min > items2_min:
+            sorted_list.append(items2_min)
+            items2.pop(0)
+        else:
+            sorted_list.append(items1_min)
+            items1.pop(0)
+    # Append remaining items in non-empty list to new list.
+    sorted_list.extend(items1 if items1 else items2)
+    # Return result of merge.
+    return sorted_list
 
 
 def split_sort_merge(items):
@@ -125,9 +142,17 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
+    # Split items list into approximately equal halves
+    middle = len(items) // 2
+    left = items[:middle]
+    right = items[middle:]
+    print('left{}, right{}', left, right)
+    # Sort each half using any other sorting algorithm
+    selection_sort(left)
+    selection_sort(right)
+    print('selection_sort_left{}, right{}', left, right)
+    # Merge sorted halves into one list in sorted order
+    items[:] = merge(left, right)
 
 
 def merge_sort(items):
@@ -139,6 +164,15 @@ def merge_sort(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half by recursively calling merge sort
     # TODO: Merge sorted halves into one list in sorted order
+    split_sort_merge(items)
+
+
+def tree_sort(items):
+    """Sort items using a binary tree."""
+    # Put all items into a binary tree.
+    tree = BinarySearchTree(items)
+    # Update given items with sorted list.
+    items[:] = tree.items_in_order()
 
 
 def random_ints(count=20, min=1, max=50):
